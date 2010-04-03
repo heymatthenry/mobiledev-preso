@@ -29,3 +29,8 @@ body {
 .title.slide {
     
 }
+
+.content {
+    position: relative;
+    text-align: center;
+}

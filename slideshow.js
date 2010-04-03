@@ -79,6 +79,7 @@
       this.registerEvents();
       this.setBgDimensions(this.slide);
       this.setPosition();
+      this.centerContent(this.slide);
     },
     
     registerEvents: function(){
@@ -87,6 +88,7 @@
 
       window.addEventListener("resize",function(){
         Slide.prototype.setBgDimensions(slide);
+        Slide.prototype.centerContent(slide);
       },false);
     },
     
@@ -110,8 +112,12 @@
 
     centerContent: function(slide){
       var viewport = this.viewportDimensions(),
-      contentDiv = slide.childNodes[0],
-      contentWidth, contentHeight;
+      contentDiv = slide.childNodes[1],
+      divStyle = window.getComputedStyle(contentDiv),
+      contentHeight = divStyle.getPropertyValue("height").replace("px","");
+
+      contentDiv.style.top = ( viewport["height"]/2 ) 
+        - contentHeight + "px";
     },
     
     viewportDimensions: function(){
