@@ -7,14 +7,23 @@ body {
     color: #ccc;
     font-family: "Helvetica Neue";
     overflow: hidden;
+    -webkit-transition: all 250ms ease;
+    -webkit-transform: translateX(0);
 }
 
-section {
+.deck {
+    -webkit-transition: all 250ms ease;
+    -webkit-transform: translateX(0);
+}
+
+.slide {
     background-image: -webkit-gradient(linear,
                                        0 0, 0 100%,
                                        from(#111), color-stop(70%, #111),
                                        color-stop(70%, #111), to(#333));
     margin: 0;
+    position: absolute;
+    top: 0;
 }
 
 .title.slide {
