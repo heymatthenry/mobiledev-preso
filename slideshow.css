@@ -19,12 +19,16 @@ h1 {
 
 a {
     color: #15E569;
-    text-shadow: 0 0 2px #18FF75;
+    text-shadow: 0 0 3px #18FF75;
     text-decoration: none;
 }
 
 ul, li {
-    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-top: 75px;
 }
 
 .deck {
@@ -42,11 +46,26 @@ ul, li {
     top: 0;
 }
 
-.title.slide {
-    
-}
-
 .content {
     position: relative;
-    text-align: center;
+    top: 170px;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.continued {
+    font-size: .5em;
+}
+
+.footnote {
+    margin-top: 200px;
+}
+
+dt {
+    clear: both;
+    float: left;
+}
+
+dd {
+    float: right;
 }

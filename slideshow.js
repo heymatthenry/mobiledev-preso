@@ -68,9 +68,10 @@
 
   }
 
-  function Slide(slide,index){
+  function Slide(slide,index,shouldCenter){
     this.slide = slide;
     this.index = index;
+    this.shouldCenter = shouldCenter;
     this.init();
   };
 
@@ -79,16 +80,18 @@
       this.registerEvents();
       this.setBgDimensions(this.slide);
       this.setPosition();
-      this.centerContent(this.slide);
+      if (this.shouldCenter) this.centerContent(this.slide);
     },
     
     registerEvents: function(){
       var slide = this.slide,
+      shouldCenter = this.shouldCenter;
       body = document.body;
 
       window.addEventListener("resize",function(){
         Slide.prototype.setBgDimensions(slide);
-        Slide.prototype.cent(slide);
+        if (shouldCenter)
+          Slide.prototype.centerContent(slide);
       },false);
     },
     
@@ -129,7 +132,7 @@
   }
 
   for (var i=0,len=slides.length; i<len; i++){
-    new Slide(slides[i],i);
+    new Slide(slides[i],i,false);
   }
 
   deck = new Deck();
