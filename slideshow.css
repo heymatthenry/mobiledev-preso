@@ -1,4 +1,4 @@
-html, body, div, h1, h2, h3 {
+html, body, div, h1, h2, h3, p {
     margin: 0;
     padding: 0;
 }
@@ -6,9 +6,25 @@ html, body, div, h1, h2, h3 {
 body {
     color: #ccc;
     font-family: "Helvetica Neue";
+    font-size: 1.5em;
     overflow: hidden;
     -webkit-transition: all 250ms ease;
     -webkit-transform: translateX(0);
+}
+
+h1 {
+    color: #00E5E5;
+    text-shadow: 0px 0px 4px #00FFFF;
+}
+
+a {
+    color: #15E569;
+    text-shadow: 0 0 2px #18FF75;
+    text-decoration: none;
+}
+
+ul, li {
+    list-style-type: none;
 }
 
 .deck {

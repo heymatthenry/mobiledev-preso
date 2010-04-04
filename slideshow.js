@@ -88,7 +88,7 @@
 
       window.addEventListener("resize",function(){
         Slide.prototype.setBgDimensions(slide);
-        Slide.prototype.centerContent(slide);
+        Slide.prototype.cent(slide);
       },false);
     },
     
