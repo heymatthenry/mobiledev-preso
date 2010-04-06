@@ -1,171 +1,194 @@
 (function(){
-  var deck,slides,i,len;
-  slides = document.querySelectorAll('section.slide');
+  var jsDeck;
 
-  function SlideLoader(){
-    this.currentSlide = 1;
-  }
+  function JSDeck(){
 
-  SlideLoader.prototype = {
-    setCurrentSlide: function(slideNum){
-      this.currentSlide = slideNum;
+    var deck,slides,i,len;
+    slides = document.querySelectorAll('section.slide');
+
+    function SlideLoader(deck){
+      this.deck = deck;
     }
-  }
 
-  function Deck(){
-    this.deck = document.querySelector('.deck');
-    this.registerEvents();
-    this.slideList();
-  }
+    SlideLoader.prototype = {
+      setCurrentSlide: function(slideNum){
+        this.currentSlide = slideNum;
+      },
 
-  Deck.prototype = {
-    currentSlide: 1,
-
-    registerEvents: function(){
-      var deck = this.deck;
-
-      document.addEventListener("keyup",function(e){
-        Deck.prototype.handleKeys(e,deck);
-      },false);
-    },
-
-    nextSlide: function(slide){
-      var currentSlide = this.currentSlide;
-
-      if (currentSlide != slides.length) {
-        var width = this.viewportDimensions()["width"] * currentSlide;
-        slide.style.webkitTransform = "translateX(-"+width+"px)";
-        this.currentSlide += 1;
-      } else {
-        console.log("Already at last slide");
-      }
-    },
-
-    previousSlide: function(slide){
-      var currentSlide = this.currentSlide;
-
-      if (currentSlide != 1){
-        var xPos = slide.style.webkitTransform.match(/\d+/)[0],
-        width = xPos - this.viewportDimensions()["width"];
-        slide.style.webkitTransform = "translateX(-"+width+"px)";
-        this.currentSlide -= 1;
-      } else {
-        console.log("Already on first slide");
-      }
-    },
-    
-    handleKeys: function(e,slide){
-      switch(e.keyIdentifier){
-      case "Right":
-        this.nextSlide(slide);
-        break;
-      case "Left":
-        this.previousSlide(slide);
-        break;
-      case "U+0020":
-        e.shiftKey ? 
-          this.previousSlide(slide):
-          this.nextSlide(slide);
-        break;
-      }
-    },
-
-    viewportDimensions: function(){
-      return {
-        "height": window.innerHeight,
-        "width" : window.innerWidth
-      }
-    },
-
-    getSlideTitles: function(){
-      var titleEls = document.querySelectorAll('.slide .title'),
-      titleList = [],i,len;
-
-      for (i=0,len=titleEls.length;i<len;i++){
-        titleList.push(titleEls[i].childNodes[0].nodeValue);
-      }
-      return titleList;
-    },
-
-    slideList: function(){
-      var titleList = this.getSlideTitles(),
-      viewport = this.viewportDimensions(),
-      listContainer,i,len;
-      
-      listContainer = document.getElementById('slideList');
-      listContainer.style.top = viewport["height"] + "px";
-      for (i=0,len=titleList; i<len; i++){
-        
+      /*
+       * Unhide the current slide as 
+       * well as the previous and next slides
+       *
+       * @method showCurrentSlide
+       **/
+      showCurrentSlide: function(){
+        var curSlideIndex = this.deck.currentSlide.index,
+        prevSlide,
+        nextSlide = curSlide.next();
       }
     }
-  }
 
-  function Slide(slide,index,shouldCenter){
-    this.slide = slide;
-    this.index = index;
-    this.shouldCenter = shouldCenter;
-    this.init();
-  };
-
-  Slide.prototype = {
-    init: function(){
+    function Deck(){
+      this.deck = document.querySelector('.deck');
+      this.slides = [];
       this.registerEvents();
-      this.setBgDimensions(this.slide);
-      this.setPosition();
-      if (this.shouldCenter) this.centerContent(this.slide);
-    },
-    
-    registerEvents: function(){
-      var slide = this.slide,
-      shouldCenter = this.shouldCenter;
-      body = document.body;
+    }
 
-      window.addEventListener("resize",function(){
-        Slide.prototype.setBgDimensions(slide);
-        if (shouldCenter)
-          Slide.prototype.centerContent(slide);
-      },false);
-    },
-    
-    setPosition: function(){
-      var slide = this.slide, 
-      index = this.index,
-      width = this.viewportDimensions()["width"];
-      slide.style.left = width * index +"px";
-    },
+    Deck.prototype = {
+      currentSlide: 1,
 
-    setBgDimensions: function(slide){
-      var viewport = this.viewportDimensions(),
-      padding = window
-        .getComputedStyle(slide)
-        .getPropertyValue("padding-top")
-        .replace("px","");
+      registerEvents: function(){
+        var deck = this.deck;
 
-      slide.style.height = (viewport["height"] - padding) + "px";
-      slide.style.width = (viewport["width"] - padding) + "px";
-    },
+        document.addEventListener("keyup",function(e){
+          Deck.prototype.handleKeys(e,deck);
+        },false);
+      },
 
-    centerContent: function(slide){
-      var viewport = this.viewportDimensions(),
-      contentDiv = slide.childNodes[1],
-      divStyle = window.getComputedStyle(contentDiv),
-      contentHeight = divStyle.getPropertyValue("height").replace("px","");
+      nextSlide: function(slide){
+        var currentSlide = this.currentSlide;
 
-      contentDiv.style.top = ( viewport["height"]/2 ) 
-        - contentHeight + "px";
-    },
-    
-    viewportDimensions: function(){
-      return {
-        "height": window.innerHeight,
-        "width" : window.innerWidth
+        if (currentSlide != slides.length) {
+          var width = this.viewportDimensions()["width"] * currentSlide;
+          slide.style.webkitTransform = "translateX(-"+width+"px)";
+          this.currentSlide += 1;
+        } else {
+          console.log("Already at last slide");
+        }
+      },
+
+      previousSlide: function(slide){
+        var currentSlide = this.currentSlide;
+
+        if (currentSlide != 1){
+          var xPos = slide.style.webkitTransform.match(/\d+/)[0],
+          width = xPos - this.viewportDimensions()["width"];
+          slide.style.webkitTransform = "translateX(-"+width+"px)";
+          this.currentSlide -= 1;
+        } else {
+          console.log("Already on first slide");
+        }
+      },
+      
+      handleKeys: function(e,slide){
+        switch(e.keyIdentifier){
+        case "Right":
+          this.nextSlide(slide);
+          break;
+        case "Left":
+          this.previousSlide(slide);
+          break;
+        case "U+0020":
+          e.shiftKey ? 
+            this.previousSlide(slide):
+            this.nextSlide(slide);
+          break;
+        }
+      },
+
+      viewportDimensions: function(){
+        return {
+          "height": window.innerHeight,
+          "width" : window.innerWidth
+        }
+      },
+
+      getSlideTitles: function(){
+        var titleEls = document.querySelectorAll('.slide .title'),
+        titleList = [],i,len;
+
+        for (i=0,len=titleEls.length;i<len;i++){
+          titleList.push(titleEls[i].childNodes[0].nodeValue);
+        }
+        return titleList;
       }
     }
+
+    function Slide(slideEl,index,shouldCenter){
+      this.slideEl = slideEl;
+      this.index = index;
+      this.title = this.getTitle();
+      this.shouldCenter = shouldCenter;
+
+      this.init();
+    };
+
+    Slide.prototype = {
+      init: function(){
+        this.registerEvents();
+        this.setBgDimensions(this.slideEl);
+        this.setPosition();
+        if (this.shouldCenter) 
+          this.centerContent(this.slideEl);
+      },
+      
+      getTitle: function(){
+        var children = this.slideEl.childNodes[1].childNodes,
+        title,child,i,len;
+        
+        for (i=0,len=children.length; i<len; i++){
+          child = children[i];
+          if (child.nodeName === "H2" && child.getAttribute("class").match("title"))
+            title = child.childNodes[0].nodeValue;
+        }
+
+        return title;
+      },
+
+      registerEvents: function(){
+        var slide = this.slide,
+        shouldCenter = this.shouldCenter;
+        body = document.body;
+
+        window.addEventListener("resize",function(){
+          Slide.prototype.setBgDimensions(slideEl);
+          if (shouldCenter)
+            Slide.prototype.centerContent(slideEl);
+        },false);
+      },
+      
+      setPosition: function(){
+        var slideEl = this.slideEl, 
+        index = this.index,
+        width = this.viewportDimensions()["width"];
+        slideEl.style.left = width * index +"px";
+      },
+
+      setBgDimensions: function(slideEl){
+        var viewport = this.viewportDimensions(),
+        padding = window
+          .getComputedStyle(slideEl)
+          .getPropertyValue("padding-top")
+          .replace("px","");
+
+        slideEl.style.height = (viewport["height"] - padding) + "px";
+        slideEl.style.width = (viewport["width"] - padding) + "px";
+      },
+
+      centerContent: function(slideEl){
+        var viewport = this.viewportDimensions(),
+        contentDiv = slideEl.childNodes[1],
+        divStyle = window.getComputedStyle(contentDiv),
+        contentHeight = divStyle.getPropertyValue("height").replace("px","");
+
+        contentDiv.style.top = ( viewport["height"]/2 ) 
+          - contentHeight + "px";
+      },
+      
+      viewportDimensions: function(){
+        return {
+          "height": window.innerHeight,
+          "width" : window.innerWidth
+        }
+      }
+    }
+
+    for (var i=0,len=slides.length; i<len; i++){
+      new Slide(slides[i],i,false);
+    }
+
+    deck = new Deck();    
   }
 
-  for (var i=0,len=slides.length; i<len; i++){
-    new Slide(slides[i],i,false);
-  }
-
-  deck = new Deck();
+  jsDeck = new JSDeck();
 })()
