@@ -28,7 +28,7 @@ ul, li {
 }
 
 li {
-    margin-top: 75px;
+    margin-top: 65px;
 }
 
 .deck {
@@ -68,4 +68,11 @@ dt {
 
 dd {
     float: right;
+}
+
+#slideList {
+    -webkit-transition: all 250ms ease;
+    -webkit-transform: translateY(0);
+    position:absolute;
+    /* bottom: 0; */
 }

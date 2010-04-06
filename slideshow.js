@@ -2,9 +2,20 @@
   var deck,slides,i,len;
   slides = document.querySelectorAll('section.slide');
 
+  function SlideLoader(){
+    this.currentSlide = 1;
+  }
+
+  SlideLoader.prototype = {
+    setCurrentSlide: function(slideNum){
+      this.currentSlide = slideNum;
+    }
+  }
+
   function Deck(){
     this.deck = document.querySelector('.deck');
     this.registerEvents();
+    this.slideList();
   }
 
   Deck.prototype = {
@@ -64,8 +75,29 @@
         "height": window.innerHeight,
         "width" : window.innerWidth
       }
-    }
+    },
 
+    getSlideTitles: function(){
+      var titleEls = document.querySelectorAll('.slide .title'),
+      titleList = [],i,len;
+
+      for (i=0,len=titleEls.length;i<len;i++){
+        titleList.push(titleEls[i].childNodes[0].nodeValue);
+      }
+      return titleList;
+    },
+
+    slideList: function(){
+      var titleList = this.getSlideTitles(),
+      viewport = this.viewportDimensions(),
+      listContainer,i,len;
+      
+      listContainer = document.getElementById('slideList');
+      listContainer.style.top = viewport["height"] + "px";
+      for (i=0,len=titleList; i<len; i++){
+        
+      }
+    }
   }
 
   function Slide(slide,index,shouldCenter){
