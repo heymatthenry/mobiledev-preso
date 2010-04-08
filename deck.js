@@ -4,8 +4,6 @@ function Deck(){
 }
 
 Deck.prototype = {
-  currentSlide: 1,
-
   getSlideTitles: function(){
     var titleEls = document.querySelectorAll('.slide .title'),
     titleList = [],i,len;

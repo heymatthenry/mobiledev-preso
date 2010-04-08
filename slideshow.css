@@ -74,5 +74,18 @@ dd {
     -webkit-transition: all 250ms ease;
     -webkit-transform: translateY(0);
     position:absolute;
-    /* bottom: 0; */
+}
+
+#notice {
+    background-color: rgba(204,204,204,.2);
+    border-radius: 16px;
+    padding: .5em;
+	  position: absolute;
+      top: 2em;
+      left: 2em;
+    width: 400px;
+}
+
+#notice a {
+    float: right;
 }

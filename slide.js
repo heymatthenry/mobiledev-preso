@@ -30,7 +30,7 @@ Slide.prototype = {
   },
 
   registerEvents: function(){
-    var slide = this.slide,
+    var slideEl = this.slideEl,
     shouldCenter = this.shouldCenter;
     body = document.body;
 
