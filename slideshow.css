@@ -49,6 +49,7 @@ li {
 .content {
     position: relative;
     top: 170px;
+    left: 10%;
     width: 60%;
     margin: 0 auto;
 }
