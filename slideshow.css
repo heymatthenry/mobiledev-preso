@@ -17,6 +17,10 @@ h1 {
     text-shadow: 0px 0px 4px #00FFFF;
 }
 
+h1, h2:not(.subtitle) {
+    text-align: center;
+}
+
 a {
     color: #15E569;
     text-shadow: 0 0 3px #18FF75;
@@ -46,10 +50,18 @@ li {
     top: 0;
 }
 
+.title.slide p,
+.title.slide .subtitle {
+    margin-left: 200px;
+}
+
+.slide ul{
+    margin-left: 7em;
+}
+
 .content {
     position: relative;
     top: 170px;
-    left: 10%;
     width: 60%;
     margin: 0 auto;
 }
