@@ -1,3 +1,10 @@
+@font-face {
+	font-family: 'MaximumSecurity';
+	src: url('fonts/MAXIMUMSECURITY.eot');
+	src: local('Maximum Security'), local('MaximumSecurity'), url('fonts/MAXIMUMSECURITY.woff') format('woff'), url('fonts/MAXIMUMSECURITY.ttf') format('truetype'), url('fonts/MAXIMUMSECURITY.svg#MaximumSecurity') format('svg');
+}
+
+
 html, body, div, h1, h2, h3, p {
     margin: 0;
     padding: 0;
@@ -104,4 +111,38 @@ dd {
     float: right;
     font-size: 1.2em;
 		text-shadow: 0px 0px 3px #E51726;
+}
+
+#ie {
+    text-align: center;
+}
+
+#ie img {
+    border-radius: 16px;
+}
+
+#fastModem {
+    color: #D0FF1E;
+    font-family: 'MaximumSecurity';
+    font-size: 3em;
+    text-align: center;
+}
+
+#fastModem img {
+    border-radius: 16px;
+}
+
+#knowYourAudience {
+    background: url(images/crazy_phone_guy.jpg) no-repeat top left;
+    background-size: 100%;
+}
+
+#knowYourAudience .content{
+    background-color: rgba(51,51,51,.7);
+    font-size: 2.5em;
+    padding: .5em 0;
+    position: relative;
+    top: 75%;
+    text-align: center;
+    width: 100%;
 }
